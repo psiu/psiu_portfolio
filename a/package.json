@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "export PATH=\"/Users/patricksiu/.nvm/versions/node/v24.16.0/bin:$PATH\" && vite build",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
