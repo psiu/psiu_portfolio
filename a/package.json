@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "export PATH=\"/Users/patricksiu/.nvm/versions/node/v24.16.0/bin:$PATH\" && vite build && (cd a && npm run build) && (cd c && npm run build) && mkdir -p dist/a dist/b dist/c && cp -r a/dist/* dist/a/ && cp b/index.html dist/b/ && cp -r c/dist/client/* dist/c/",
+    "build": "export PATH=\"/Users/patricksiu/.nvm/versions/node/v24.16.0/bin:$PATH\" && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },

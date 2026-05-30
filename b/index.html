@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Patrick Siu — Portfolio Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ============================
+   CSS DESIGN SYSTEM
+   ============================ */
+:root {
+  /* Core palette */
+  --bg-base:       #080c14;
+  --bg-surface:    #0d1320;
+  --bg-card:       #111826;
+  --bg-card-hover: #141d2e;
+
+  /* Glass */
+  --glass-bg:      rgba(255,255,255,0.04);
+  --glass-border:  rgba(255,255,255,0.08);
+  --glass-blur:    12px;
+  --glass-hover-bg: rgba(255,255,255,0.07);
+
+  /* Accent — electric teal/cyan */
+  --accent:        #00d4aa;
+  --accent-dim:    rgba(0,212,170,0.15);
+  --accent-glow:   rgba(0,212,170,0.25);
+  --accent-2:      #3b82f6;   /* blue for tags */
+  --accent-2-dim:  rgba(59,130,246,0.15);
+
+  /* Text */
+  --text-primary:   #e8edf5;
+  --text-secondary: #8899b4;
+  --text-muted:     #4a5568;
+  --text-accent:    #00d4aa;
+
+  /* Typography */
+  --font-display: 'Outfit', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  /* Layout */
+  --max-width: 900px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ============================
+   ANIMATED BACKGROUND
+   ============================ */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,212,170,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,170,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-glow-1 {
+  position: fixed;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,212,170,0.06) 0%, transparent 70%);
+  top: -200px; right: -100px;
+  pointer-events: none; z-index: 0;
+  animation: floatGlow 12s ease-in-out infinite alternate;
+}
+.bg-glow-2 {
+  position: fixed;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59,130,246,0.05) 0%, transparent 70%);
+  bottom: -150px; left: -100px;
+  pointer-events: none; z-index: 0;
+  animation: floatGlow 16s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes floatGlow {
+  0%   { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(40px) scale(1.08); opacity: 0.7; }
+}
+
+/* ============================
+   LAYOUT
+   ============================ */
+.page { position: relative; z-index: 1; }
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+section { padding: 5rem 0; }
+
+/* ============================
+   NAVBAR
+   ============================ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(8,12,20,0.85);
+  border-bottom: 1px solid var(--glass-border);
+}
+.nav-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+/* ============================
+   HERO
+   ============================ */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeSlideUp 0.7s ease forwards 0.2s;
+}
+.eyebrow-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.5; transform: scale(0.7); }
+}
+
+.hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 8vw, 88px);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.035em;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s ease forwards 0.35s;
+}
+.hero-name-accent {
+  background: linear-gradient(135deg, var(--accent) 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-bottom: 1.75rem;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s ease forwards 0.5s;
+}
+.hero-title strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.hero-summary {
+  max-width: 620px;
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s ease forwards 0.65s;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s ease forwards 0.8s;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: var(--accent);
+  color: #050a0a;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.btn-primary:hover {
+  background: #00f0c0;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px var(--accent-glow);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: var(--glass-bg);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  backdrop-filter: blur(var(--glass-blur));
+}
+.btn-ghost:hover {
+  background: var(--glass-hover-bg);
+  border-color: rgba(255,255,255,0.16);
+  transform: translateY(-2px);
+}
+
+/* Stats strip */
+.stats-strip {
+  display: flex;
+  gap: 0;
+  margin-top: 4rem;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  backdrop-filter: blur(var(--glass-blur));
+  background: var(--glass-bg);
+  opacity: 0;
+  animation: fadeSlideUp 0.8s ease forwards 1.0s;
+}
+.stat-item {
+  flex: 1;
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+  border-right: 1px solid var(--glass-border);
+  transition: background 0.2s;
+}
+.stat-item:last-child { border-right: none; }
+.stat-item:hover { background: var(--glass-hover-bg); }
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================
+   SECTION HEADERS
+   ============================ */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--accent-dim), transparent);
+  max-width: 80px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin-bottom: 3rem;
+  line-height: 1.1;
+}
+
+/* ============================
+   SKILLS
+   ============================ */
+#skills { background: transparent; }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.skill-category {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  backdrop-filter: blur(var(--glass-blur));
+  transition: background 0.25s, border-color 0.25s, transform 0.25s;
+}
+.skill-category:hover {
+  background: var(--glass-hover-bg);
+  border-color: rgba(0,212,170,0.2);
+  transform: translateY(-3px);
+}
+
+.skill-cat-icon {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.85rem;
+  font-size: 17px;
+}
+
+.skill-cat-name {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.9rem;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.skill-tag {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius-sm);
+  padding: 3px 10px;
+  transition: background 0.2s, color 0.2s;
+}
+.skill-tag.expert {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+  background: var(--accent-dim);
+}
+.skill-category:hover .skill-tag { border-color: rgba(255,255,255,0.11); }
+
+/* ============================
+   EXPERIENCE
+   ============================ */
+#experience { background: transparent; }
+
+.timeline {
+  position: relative;
+  padding-left: 1.75rem;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 8px; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+}
+
+.exp-card {
+  position: relative;
+  margin-bottom: 1.5rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 1.75rem 1.5rem;
+  backdrop-filter: blur(var(--glass-blur));
+  transition: background 0.25s, border-color 0.25s, transform 0.25s;
+}
+.exp-card:hover {
+  background: var(--glass-hover-bg);
+  border-color: rgba(0,212,170,0.18);
+  transform: translateX(4px);
+}
+.exp-card.current {
+  border-color: rgba(0,212,170,0.25);
+}
+
+/* Timeline dot */
+.exp-card::before {
+  content: '';
+  position: absolute;
+  left: -1.88rem;
+  top: 1.9rem;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--bg-base);
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+.exp-card.current::before {
+  background: var(--accent);
+}
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.exp-role {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+.exp-team {
+  color: var(--accent);
+  font-weight: 400;
+}
+
+.exp-company {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.exp-period {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  padding: 3px 10px;
+  border: 1px solid var(--glass-border);
+  border-radius: 100px;
+}
+.exp-card.current .exp-period {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+  background: var(--accent-dim);
+}
+
+.exp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 1rem;
+}
+.exp-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #60a5fa;
+  background: var(--accent-2-dim);
+  border: 1px solid rgba(59,130,246,0.2);
+  border-radius: var(--radius-sm);
+  padding: 2px 9px;
+}
+
+.exp-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.highlight-row {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 0.75rem;
+  padding: 0.6rem 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+.highlight-row:first-child { border-top: none; }
+.highlight-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+  padding-top: 1px;
+}
+.highlight-detail { color: var(--text-secondary); }
+
+.collapsible-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  transition: color 0.2s;
+}
+.collapsible-toggle:hover { color: var(--accent); }
+.toggle-arrow { transition: transform 0.25s; font-size: 10px; }
+.toggle-arrow.open { transform: rotate(90deg); }
+
+.exp-highlights-collapsed .highlight-row:nth-child(n+3) { display: none; }
+
+/* Prior experience */
+.prior-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  backdrop-filter: blur(var(--glass-blur));
+}
+.prior-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: background 0.2s;
+}
+.prior-item:last-child { border-bottom: none; }
+.prior-item:hover { background: var(--glass-hover-bg); }
+.prior-role { font-size: 13.5px; color: var(--text-primary); font-weight: 500; }
+.prior-company { font-size: 13px; color: var(--text-secondary); margin-top: 1px; }
+.prior-period {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+/* ============================
+   EDUCATION
+   ============================ */
+#education { padding: 3rem 0; }
+.edu-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  backdrop-filter: blur(var(--glass-blur));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  transition: background 0.25s, border-color 0.25s;
+}
+.edu-card:hover {
+  background: var(--glass-hover-bg);
+  border-color: rgba(0,212,170,0.2);
+}
+.edu-inst {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+.edu-degree {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: 3px;
+}
+.edu-year {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent);
+  background: var(--accent-dim);
+  padding: 5px 16px;
+  border-radius: 100px;
+  border: 1px solid rgba(0,212,170,0.2);
+}
+
+/* ============================
+   FOOTER / CONTACT
+   ============================ */
+#contact {
+  padding: 4rem 0 3rem;
+  text-align: center;
+}
+.contact-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: 3rem 2rem;
+  backdrop-filter: blur(var(--glass-blur));
+  max-width: 520px;
+  margin: 0 auto;
+}
+.contact-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.75rem;
+}
+.contact-sub {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.contact-link:hover { transform: translateY(-2px); }
+.link-linkedin {
+  background: #0a66c2;
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(10,102,194,0.3);
+}
+.link-linkedin:hover { box-shadow: 0 8px 30px rgba(10,102,194,0.5); }
+.link-github {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+}
+.link-github:hover { background: var(--glass-hover-bg); }
+
+footer-bar {
+  display: block;
+  text-align: center;
+  padding: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--glass-border);
+}
+
+/* ============================
+   PREVIEW BANNER
+   ============================ */
+.preview-banner {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 36px;
+  background: var(--accent);
+  color: #050a0a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  z-index: 200;
+}
+
+/* Scroll reveal utility */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<div class="preview-banner">⚡ DESIGN PREVIEW — Patrick Siu Portfolio</div>
+<div class="bg-grid"></div>
+<div class="bg-glow-1"></div>
+<div class="bg-glow-2"></div>
+
+<div class="page" style="padding-top:36px">
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">Patrick <span>Siu</span></div>
+      <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#oracle">Oracle</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        Lead Data Engineer · Financial Crimes · TikTok U.S. Data Security
+      </div>
+
+      <h1 class="hero-name">
+        Patrick<br/>
+        <span class="hero-name-accent">Siu</span>
+      </h1>
+
+      <p class="hero-title">
+        <strong>25 Years</strong> Engineering at Petabyte Scale
+      </p>
+
+      <p class="hero-summary">
+        First engineering hire for TikTok's Financial Crimes unit. Scaled a 12-person team,
+        built 4PB+ multi-region data platforms, and delivered production-grade Agentic AI &amp; RAG
+        pipelines powering AML investigations at global scale.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#experience" class="btn-primary">↓ View Experience</a>
+        <a href="https://www.linkedin.com/in/patrick-siu-65086a25/" target="_blank" class="btn-ghost">LinkedIn ↗</a>
+        <a href="https://github.com/psiu/ai_bot_detection_poc" target="_blank" class="btn-ghost">GitHub ↗</a>
+      </div>
+
+      <div class="stats-strip">
+        <div class="stat-item">
+          <div class="stat-value">25+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">4PB+</div>
+          <div class="stat-label">Data Managed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">12</div>
+          <div class="stat-label">Engineers Led</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">270×</div>
+          <div class="stat-label">Perf. Uplift</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-label reveal">Technical Skills</div>
+      <h2 class="section-title reveal reveal-delay-1">Built to operate at scale.</h2>
+
+      <div class="skills-grid">
+        <div class="skill-category reveal reveal-delay-1">
+          <div class="skill-cat-icon">🐍</div>
+          <div class="skill-cat-name">Languages &amp; Compute</div>
+          <div class="skill-tags">
+            <span class="skill-tag expert">Python — Expert</span>
+            <span class="skill-tag">PySpark</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">R</span>
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">C++</span>
+            <span class="skill-tag">Bash/Shell</span>
+          </div>
+        </div>
+
+        <div class="skill-category reveal reveal-delay-2">
+          <div class="skill-cat-icon">🤖</div>
+          <div class="skill-cat-name">AI &amp; Machine Learning</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Agentic AI</span>
+            <span class="skill-tag">RAG Pipelines</span>
+            <span class="skill-tag">MCP</span>
+            <span class="skill-tag">LangChain</span>
+            <span class="skill-tag">NLP</span>
+            <span class="skill-tag">Computer Vision</span>
+            <span class="skill-tag">Graph Algorithms</span>
+            <span class="skill-tag">Neo4j</span>
+          </div>
+        </div>
+
+        <div class="skill-category reveal reveal-delay-1">
+          <div class="skill-cat-icon">⚙️</div>
+          <div class="skill-cat-name">Big Data &amp; Infrastructure</div>
+          <div class="skill-tags">
+            <span class="skill-tag">AWS</span>
+            <span class="skill-tag">GCP</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">Kubernetes</span>
+            <span class="skill-tag">Hive</span>
+            <span class="skill-tag">HDFS</span>
+            <span class="skill-tag">Hadoop</span>
+          </div>
+        </div>
+
+        <div class="skill-category reveal reveal-delay-2">
+          <div class="skill-cat-icon">🏗️</div>
+          <div class="skill-cat-name">Data Warehousing &amp; ETL</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Redshift</span>
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">Airflow</span>
+            <span class="skill-tag">CI/CD</span>
+          </div>
+        </div>
+
+        <div class="skill-category reveal reveal-delay-1">
+          <div class="skill-cat-icon">📊</div>
+          <div class="skill-cat-name">Visualization &amp; Analytics</div>
+          <div class="skill-tags">
+            <span class="skill-tag expert">Tableau — Advanced</span>
+            <span class="skill-tag">R Shiny</span>
+            <span class="skill-tag">Adobe Analytics</span>
+            <span class="skill-tag">BI Dashboards</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-label reveal">Experience</div>
+      <h2 class="section-title reveal reveal-delay-1">Engineering at the frontier.</h2>
+
+      <div class="timeline">
+
+        <!-- TikTok Financial Crimes -->
+        <div class="exp-card current reveal">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Lead Data Engineer — <span class="exp-team">Financial Crimes</span></div>
+              <div class="exp-company">TikTok U.S. Data Security</div>
+            </div>
+            <span class="exp-period">May 2024 — Present</span>
+          </div>
+          <div class="exp-tags">
+            <span class="exp-tag">LangChain</span><span class="exp-tag">RAG</span>
+            <span class="exp-tag">MCP</span><span class="exp-tag">Gemini</span>
+            <span class="exp-tag">PySpark</span><span class="exp-tag">ByteCloud</span>
+          </div>
+          <div class="exp-highlights" id="hl-fc">
+            <div class="highlight-row">
+              <div class="highlight-label">Team Leadership</div>
+              <div class="highlight-detail">Built and led a 12-person engineering team from the ground up, establishing SDLC standards, code review protocols, and modular design patterns.</div>
+            </div>
+            <div class="highlight-row">
+              <div class="highlight-label">Petabyte-Scale Arch.</div>
+              <div class="highlight-detail">Architected a multi-region data platform on ByteCloud managing 4PB+ of data, utilizing Dorado (Databricks/Spark) and HDFS.</div>
+            </div>
+            <div class="highlight-row">
+              <div class="highlight-label">GenAI &amp; LLM</div>
+              <div class="highlight-detail">Delivered production-grade LLM ecosystems with Agentic AI workflows, MCP, and RAG pipelines via LangChain, VikingDB, and Gemini.</div>
+            </div>
+            <div class="highlight-row">
+              <div class="highlight-label">Orchestration</div>
+              <div class="highlight-detail">Automated critical investigative operations with Dorado modular multi-stage pipelines for complex DAG dependency management.</div>
+            </div>
+            <div class="highlight-row">
+              <div class="highlight-label">Data Governance</div>
+              <div class="highlight-detail">Instituted a custom data governance ruleset, centralized data library, and proactive monitoring ensuring secure access control.</div>
+            </div>
+            <div class="highlight-row">
+              <div class="highlight-label">Operational Analytics</div>
+              <div class="highlight-detail">Delivered 20+ dashboards using Aeolus (in-house Tableau) to track investigator productivity and triage trends.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TikTok Data Scanning -->
+        <div class="exp-card reveal">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Data Engineer — <span class="exp-team">Data Scanning</span></div>
+              <div class="exp-company">TikTok U.S. Data Security</div>
+            </div>
+            <span class="exp-period">May 2023 – May 2024</span>
+          </div>
+          <div class="exp-tags">
+            <span class="exp-tag">Dorado API</span><span class="exp-tag">HDFS</span>
+            <span class="exp-tag">Nuix</span><span class="exp-tag">MySQL</span>
+            <span class="exp-tag">MongoDB</span><span class="exp-tag">Elasticsearch</span>
+          </div>
+          <div class="exp-highlights">
+            <div class="highlight-row">
+              <div class="highlight-label">Scale Architecture</div>
+              <div class="highlight-detail">Designed compliance scanning framework across 30,000 compute cores and 60 TB memory using Dorado API for parallel processing.</div>
+            </div>
+            <div class="highlight-row">
+              <div class="highlight-label">270× Perf. Uplift</div>
+              <div class="highlight-detail">Refactored legacy scripts for HDFS, MySQL, MongoDB, Redis, and Elasticsearch with throttling and load detection for resource safety.</div>
+            </div>
+            <div class="highlight-row">
+              <div class="highlight-label">6 Exabytes</div>
+              <div class="highlight-detail">Extended privacy scanning coverage to 6 exabytes via a custom Linux bridge integrating Nuix directly with HDFS storage.</div>
+            </div>
+            <div class="highlight-row">
+              <div class="highlight-label">Congressional Record</div>
+              <div class="highlight-detail">Generated compliance reports presented as primary evidence during high-stakes Congressional hearings on national data security.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ByteDance Bot Detection -->
+        <div class="exp-card reveal">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Data Engineer — <span class="exp-team">Bot Detection</span></div>
+              <div class="exp-company">Bytedance (TikTok)</div>
+            </div>
+            <span class="exp-period">Oct 2021 – May 2023</span>
+          </div>
+          <div class="exp-tags">
+            <span class="exp-tag">Python</span><span class="exp-tag">Hive</span>
+            <span class="exp-tag">Beautiful Soup</span><span class="exp-tag">Graph Algorithms</span>
+          </div>
+          <div class="exp-highlights">
+            <div class="highlight-row">
+              <div class="highlight-label">1B Account Pipeline</div>
+              <div class="highlight-detail">Led a 9-person team engineering a daily automated pipeline processing 1 billion user accounts to detect 14M inauthentic accounts.</div>
+            </div>
+            <div class="highlight-row">
+              <div class="highlight-label">94% Detection Rate</div>
+              <div class="highlight-detail">Engineered behavioral velocity features — coordinated spikes, interarrival times, sleep patterns — achieving 94% incremental detection.</div>
+            </div>
+            <div class="highlight-row">
+              <div class="highlight-label">Forensic Investigator</div>
+              <div class="highlight-detail">Technical investigator for 3 litigation cases, executing forensic data queries across departments for corporate depositions.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADP roles condensed -->
+        <div class="exp-card reveal">
+          <div class="exp-header">
+            <div>
+              <div class="exp-role">Lead / Principal Data Scientist</div>
+              <div class="exp-company">ADP — Multiple Roles</div>
+            </div>
+            <span class="exp-period">May 2014 – Oct 2021</span>
+          </div>
+          <div class="exp-tags">
+            <span class="exp-tag">Python</span><span class="exp-tag">R / NLP</span>
+            <span class="exp-tag">Tableau</span><span class="exp-tag">AWS</span>
+            <span class="exp-tag">Airflow</span><span class="exp-tag">Redshift</span>
+          </div>
+          <div class="exp-highlights">
+            <div class="highlight-row">
+              <div class="highlight-label">NLP Engine</div>
+              <div class="highlight-detail">Built enterprise NLP engine with R openNLP classifying 9M+ service logs at 88% precision, expanding from 26 to 442 topic categories.</div>
+            </div>
+            <div class="highlight-row">
+              <div class="highlight-label">Greenfield Infra</div>
+              <div class="highlight-detail">Built BI/analytics infrastructure for "Wisely Direct" startup using Docker + Airflow, unifying 13 data silos into Redshift + Postgres.</div>
+            </div>
+            <div class="highlight-row">
+              <div class="highlight-label">$700M Portfolio ETL</div>
+              <div class="highlight-detail">End-to-end Python ETL pipelines for a $700M digital transformation portfolio driving data-driven funding allocation decisions.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Prior Experience -->
+        <div style="margin-top:0.5rem" class="reveal">
+          <div class="section-label" style="margin-bottom:0.75rem">Prior Experience</div>
+          <div class="prior-list">
+            <div class="prior-item">
+              <div>
+                <div class="prior-role">Product Manager</div>
+                <div class="prior-company">Thomson Reuters</div>
+              </div>
+              <div class="prior-period">2012 – 2014</div>
+            </div>
+            <div class="prior-item">
+              <div>
+                <div class="prior-role">Product Manager</div>
+                <div class="prior-company">Dun &amp; Bradstreet, Inc.</div>
+              </div>
+              <div class="prior-period">2012</div>
+            </div>
+            <div class="prior-item">
+              <div>
+                <div class="prior-role">Product Manager</div>
+                <div class="prior-company">Canon U.S.A., Inc.</div>
+              </div>
+              <div class="prior-period">2007 – 2012</div>
+            </div>
+            <div class="prior-item">
+              <div>
+                <div class="prior-role">Product Manager</div>
+                <div class="prior-company">New Era Pump Systems, Inc.</div>
+              </div>
+              <div class="prior-period">2005 – 2007</div>
+            </div>
+            <div class="prior-item">
+              <div>
+                <div class="prior-role">Product Manager</div>
+                <div class="prior-company">PCW Microsystems Inc.</div>
+              </div>
+              <div class="prior-period">2003 – 2005</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="container">
+      <div class="section-label reveal">Education</div>
+      <div class="edu-card reveal reveal-delay-1">
+        <div>
+          <div class="edu-inst">Stony Brook University</div>
+          <div class="edu-degree">B.S. in Computer Science</div>
+        </div>
+        <div class="edu-year">Class of 2003</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-card reveal">
+        <div class="contact-title">Let's connect.</div>
+        <p class="contact-sub">
+          Open to senior data engineering and AI architecture discussions.<br/>
+          Reach out via LinkedIn.
+        </p>
+        <div class="contact-links">
+          <a href="https://www.linkedin.com/in/patrick-siu-65086a25/" target="_blank" class="contact-link link-linkedin">
+            LinkedIn
+          </a>
+          <a href="https://github.com/psiu/ai_bot_detection_poc" target="_blank" class="contact-link link-github">
+            GitHub ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer-bar>
+    © 2026 Patrick Siu — Built with React + Vite + Framer Motion
+  </footer-bar>
+
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
