@@ -1,0 +1,28 @@
+# psiu_portfolio Netlify config
+# /a and /b are static HTML — served as-is from the repo root.
+# /c is a Vite + TanStack Router SPA that is compiled on each deploy.
+[build]
+  command = "cd c && npm install && npm run build"
+  publish = "."
+
+# Rewrite /c/assets/* requests to where Vite actually outputs them.
+# Must come before the wildcard rule below (Netlify evaluates top-to-bottom).
+[[redirects]]
+  from   = "/c/assets/*"
+  to     = "/c/dist/assets/:splat"
+  status = 200
+  force  = true
+
+# SPA fallback — serve the compiled shell for every /c route so
+# TanStack Router can handle navigation client-side.
+[[redirects]]
+  from   = "/c"
+  to     = "/c/dist/index.html"
+  status = 200
+  force  = true
+
+[[redirects]]
+  from   = "/c/*"
+  to     = "/c/dist/index.html"
+  status = 200
+  force  = true

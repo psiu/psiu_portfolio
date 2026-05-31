@@ -26,3 +26,6 @@ dist-ssr
 *.env
 
 src/assets/docs/Patrick_Siu_Text_Resume.pdf
+
+netlify_backup.toml
+c/index-backup.html
