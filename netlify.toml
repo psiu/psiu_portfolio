@@ -1,31 +1,20 @@
-# psiu_portfolio Netlify config
-#
-# Build pipeline:
-#   1. Build root site  → dist/
-#   2. Build /a         → dist/a/
-#   3. Build /c (SPA)   → dist/c/
-#   /b is a static HTML file copied into dist/b/
 
+# psiu_portfolio — Netlify deploy config
+# The root package.json build script already handles:
+#   1. Root Vite app
+#   2. /a build + copy to dist/a/
+#   3. /b copy to dist/b/
+#   4. /c build + copy dist/client/* to dist/c/
+# So we just run that single script here.
 [build]
-  command = """
-    npm install && npm run build && \
-    cd a && npm install && npm run build && cd .. && \
-    cd c && npm install && npm run build && cd .. && \
-    mkdir -p dist/a dist/b dist/c && \
-    cp -r a/dist/* dist/a/ && \
-    cp b/index.html dist/b/ && \
-    cp -r c/dist/* dist/c/
-  """
+  command = "npm install && npm run build"
   publish = "dist"
-
-# SPA fallback for /c — serves the compiled shell for every /c route so
-# TanStack Router can handle client-side navigation.
-[[redirects]]
-  from   = "/c"
-  to     = "/c/index.html"
-  status = 200
-
+ 
+# /c is a React SPA. Any deep-linked route (e.g. /c/about) has no
+# physical file — serve the shell index.html and let TanStack Router
+# handle it client-side.
 [[redirects]]
   from   = "/c/*"
   to     = "/c/index.html"
   status = 200
+ 
